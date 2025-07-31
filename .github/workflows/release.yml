@@ -103,7 +103,7 @@ jobs:
       - name: Build Release
         run: cd client && flutter build windows
       - name: rename
-        run: rename build\windows\x64\runner\Release\client.exe build\windows\x64\runner\Release\Ourchat.exe
+        run: mv build\windows\x64\runner\Release\client.exe build\windows\x64\runner\Release\Ourchat.exe
       - name: compress
         run: tar -czvf ourchat-client-windows.tar.gz client/build/windows/x64/runner/Release
       - name: Release
