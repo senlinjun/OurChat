@@ -7,58 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  create_server_release:
-    name: Create server release
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
-
-      - name: Get release version
-        id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Build and push Docker image
-        run: |
-          python3 script/build_production_container.py --extension ${{ steps.get_version.outputs.VERSION }} --skip_base --push
-
-      - name: Prepare server bundle files
-        run: |
-          mkdir -p bundle
-          cp docker/compose.yml bundle/
-          cp docker/compose.debian.yml bundle/
-          cp -r config bundle/
-
-      - name: Update image tags in compose files
-        run: |
-          export VERSION=${{ steps.get_version.outputs.VERSION }}
-          sed -i "s/nightly/$VERSION/g" bundle/compose.yml
-          sed -i "s/nightly/$VERSION/g" bundle/compose.debian.yml
-
-      - name: Create server bundle archive
-        run: |
-          cd bundle
-          zip -r ../ourchat-server.zip .
-          cd ..
-
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            ourchat-server.zip
-
-  create_client_linux_release:
+  create_client_android_release:
     name: Create client release
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
@@ -84,12 +33,12 @@ jobs:
           sudo apt update
           sudo apt install -y libgtk-3-dev
       - name: Build Release
-        run: cd client && flutter build linux
-      - name: Create Zip
-        run: zip -r ourchat-client-linux.zip client/build/linux/x64/release/bundle/
+        run: cd client && flutter build apk
+      - name: rename
+        run: mv client/build/app/outputs/flutter-apk/app-release.apk client/build/app/outputs/flutter-apk/OurChat.apk
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            ourchat-client-linux.zip
+            client/build/app/outputs/flutter-apk/OurChat.apk
