@@ -86,7 +86,7 @@ jobs:
       - name: Build Release
         run: cd client && flutter build linux
       - name: Compress
-        run: cd client/build/linux/x64/release && tar -czvf ourchat-client-linux.tar.gz /bundle
+        run: cd client/build/linux/x64/release && tar -czvf ourchat-client-linux.tar.gz bundle/
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
