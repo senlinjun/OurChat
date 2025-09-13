@@ -96,4 +96,3 @@ with open("./client/lib/about.dart", "w", encoding="utf-8") as f:
     
 
 os.system("dart format ./client/lib/about.dart")
-
