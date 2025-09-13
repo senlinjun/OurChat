@@ -76,7 +76,7 @@ jobs:
       - name: Install requests
         run: pip install requests
       - name: About code generate
-        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --tag ${{ github.ref }} --commit_sha ${{ github.sha }}
+        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --version tag ${{ github.ref_name }} --commit_sha ${{ github.sha }}
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -116,7 +116,7 @@ jobs:
       - name: Install requests
         run: pip install requests
       - name: About code generate
-        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --tag ${{ github.ref }} --commit_sha ${{ github.sha }}
+        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --version tag ${{ github.ref_name }} --commit_sha ${{ github.sha }}
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -156,7 +156,7 @@ jobs:
       - name: Install requests
         run: pip install requests
       - name: About code generate
-        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --tag ${{ github.ref }} --commit_sha ${{ github.sha }}
+        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --version tag ${{ github.ref_name }} --commit_sha ${{ github.sha }}
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -194,7 +194,7 @@ jobs:
       - name: Install requests
         run: pip install requests
       - name: About code generate
-        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --tag ${{ github.ref }} --commit_sha ${{ github.sha }}
+        run: python script/generate_about_code.py --afdian_userid ${{ secrets.AFDIAN_USERID }} --afdian_token ${{ secrets.AFDIAN_TOKEN }} --version ${{ github.ref_name }} --commit_sha ${{ github.sha }}
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
