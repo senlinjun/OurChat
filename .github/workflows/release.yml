@@ -81,7 +81,7 @@ jobs:
           gitee_owner: skyuoi
           gitee_repo: OurChat
           gitee_token: ${{ secrets.GITEE_TOKEN }}
-          gitee_tag_name: v2.0.0
+          gitee_tag_name: ${{ github.ref_name }}
           gitee_upload_retry_times: 3
           gitee_file_name: ourchat-server.zip
           gitee_file_path: ourchat-server.zip
@@ -132,7 +132,7 @@ jobs:
           gitee_owner: skyuoi
           gitee_repo: OurChat
           gitee_token: ${{ secrets.GITEE_TOKEN }}
-          gitee_tag_name: v2.0.0
+          gitee_tag_name: ${{ github.ref_name }}
           gitee_upload_retry_times: 3
           gitee_file_name: ourchat-client-linux.tar.gz
           gitee_file_path: client/build/linux/x64/release/ourchat-client-linux.tar.gz
@@ -183,7 +183,7 @@ jobs:
           gitee_owner: skyuoi
           gitee_repo: OurChat
           gitee_token: ${{ secrets.GITEE_TOKEN }}
-          gitee_tag_name: v2.0.0
+          gitee_tag_name: ${{ github.ref_name }}
           gitee_upload_retry_times: 3
           gitee_file_name: OurChat.apk
           gitee_file_path: client/build/app/outputs/flutter-apk/OurChat.apk
@@ -232,7 +232,7 @@ jobs:
           gitee_owner: skyuoi
           gitee_repo: OurChat
           gitee_token: ${{ secrets.GITEE_TOKEN }}
-          gitee_tag_name: v2.0.0
+          gitee_tag_name: ${{ github.ref_name }}
           gitee_upload_retry_times: 3
           gitee_file_name: ourchat-client-windows.tar.gz
           gitee_file_path: client/build/windows/x64/runner/ourchat-client-windows.tar.gz
@@ -279,7 +279,7 @@ jobs:
           gitee_owner: skyuoi
           gitee_repo: OurChat
           gitee_token: ${{ secrets.GITEE_TOKEN }}
-          gitee_tag_name: v2.0.0
+          gitee_tag_name: ${{ github.ref_name }}
           gitee_upload_retry_times: 3
           gitee_file_name: ourchat-client-macos.tar.gz
           gitee_file_path: client/build/macos/Build/Products/ourchat-client-macos.tar.gz
