@@ -271,7 +271,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            client/build/macos/Build/Products/ourchat-client-macos.tar.gz
+            client/build/macos/Build/Products/Release/ourchat-client-macos.tar.gz
       - name: Release to Gitee
         uses: nicennnnnnnlee/action-gitee-release@master
         with:
@@ -282,4 +282,4 @@ jobs:
           gitee_tag_name: ${{ github.ref_name }}
           gitee_upload_retry_times: 3
           gitee_file_name: ourchat-client-macos.tar.gz
-          gitee_file_path: client/build/macos/Build/Products/ourchat-client-macos.tar.gz
+          gitee_file_path: client/build/macos/Build/Products/Release/ourchat-client-macos.tar.gz
