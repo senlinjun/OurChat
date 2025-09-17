@@ -265,7 +265,7 @@ jobs:
       - name: Build Release
         run: cd client && flutter build macos
       - name: Compress
-        run: cd client/build/macos/Build/Products && tar -czvf ourchat-client-macos.tar.gz Release
+        run: cd build/macos/Build/Products/Release && tar -czvf ourchat-client-macos.tar.gz OurChat.app
       - name: Release to Github
         uses: softprops/action-gh-release@v2
         with:
