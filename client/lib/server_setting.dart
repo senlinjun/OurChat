@@ -39,8 +39,10 @@ class _ServerSettingState extends State<ServerSetting> {
       children: [
         const Padding(
           padding: EdgeInsets.all(10.0),
-          child: SizedBox(height: 100.0, width: 100.0, child: Placeholder()),
-          // child: Image(image: AssetImage("assets/images/logo.png"))
+          child: SizedBox(
+              height: 100.0,
+              width: 100.0,
+              child: Image(image: AssetImage("assets/images/logo.png"))),
         ),
         Row(
           // 展示服务端ip
