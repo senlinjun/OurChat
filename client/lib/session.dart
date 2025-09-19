@@ -415,7 +415,10 @@ class _UserTabState extends State<UserTab> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 100, height: 100, child: Placeholder()),
+                SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Image(image: AssetImage("assets/images/logo.png"))),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Table(
@@ -625,7 +628,9 @@ class _SessionListState extends State<SessionList> {
                                 const SizedBox(
                                     width: 40.0,
                                     height: 40.0,
-                                    child: Placeholder()),
+                                    child: Image(
+                                        image: AssetImage(
+                                            "assets/images/logo.png"))),
                                 if (isFriend)
                                   Text(
                                       "${account.displayName} (${account.username})")
@@ -691,7 +696,9 @@ class _SessionListState extends State<SessionList> {
                               SizedBox(
                                 height: 40,
                                 width: 40,
-                                child: Placeholder(),
+                                child: Image(
+                                    image:
+                                        AssetImage("assets/images/logo.png")),
                               ),
                               Expanded(
                                 child: Padding(
@@ -824,7 +831,8 @@ class _NewSessionDialogState extends State<NewSessionDialog> {
                           SizedBox(
                             height: 40,
                             width: 40,
-                            child: Placeholder(),
+                            child: Image(
+                                image: AssetImage("assets/images/logo.png")),
                           ),
                           Expanded(
                             child: Padding(

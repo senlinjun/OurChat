@@ -1,8 +1,17 @@
+import 'dart:async';
+import 'dart:typed_data';
+
+import 'package:crypto/crypto.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:ourchat/server_setting.dart';
 import 'package:ourchat/about.dart';
+import 'package:ourchat/service/ourchat/set_account_info/v1/set_account_info.pb.dart';
+import 'package:ourchat/service/ourchat/upload/v1/upload.pb.dart';
+import 'package:ourchat/service/ourchat/v1/ourchat.pbgrpc.dart';
 import 'package:provider/provider.dart';
 import 'package:ourchat/l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 import 'main.dart';
 
 class User extends StatelessWidget {
@@ -19,10 +28,53 @@ class User extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(10.0),
-          child: SizedBox(
-            width: 100.0,
-            height: 100.0,
-            child: Placeholder(),
+          child: InkWell(
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: 100.0,
+                  height: 100.0,
+                  child: Image(image: AssetImage("assets/images/logo.png")),
+                ),
+                Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        backgroundBlendMode: BlendMode.overlay,
+                        color: Theme.of(context).cardColor,
+                        borderRadius:
+                            BorderRadius.only(topLeft: Radius.circular(5)),
+                      ),
+                      child: Icon(Icons.edit, size: 20),
+                    ))
+              ],
+            ),
+            onTap: () async {
+              ImagePicker picker = ImagePicker();
+              XFile? image =
+                  await picker.pickImage(source: ImageSource.gallery);
+              if (image == null) return;
+              Uint8List biData = await image.readAsBytes();
+              var stub = OurChatServiceClient(appState.server!.channel!,
+                  interceptors: [appState.server!.interceptor!]);
+              StreamController<UploadRequest> controller =
+                  StreamController<UploadRequest>();
+              var call = stub.upload(controller.stream);
+              controller.add(UploadRequest(
+                metadata: Header(
+                    hash: sha256.convert(biData.toList()).bytes,
+                    size: Int64.parseInt(biData.length.toString()),
+                    autoClean: false),
+              ));
+              controller.add(UploadRequest(content: biData.toList()));
+              await controller.close();
+              var res = await call;
+              var setInfoRes = await stub
+                  .setSelfInfo(SetSelfInfoRequest(avatarKey: res.key));
+            },
           ),
         ),
         Text(
