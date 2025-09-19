@@ -66,10 +66,12 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(10.0),
                       child: SizedBox(
-                          height: 100.0, width: 100.0, child: Placeholder()),
+                          height: 100.0,
+                          width: 100.0,
+                          child: Image.asset("assets/images/logo.png")),
                     ),
                     TextFormField(
                       // 账号输入框
