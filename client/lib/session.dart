@@ -993,7 +993,6 @@ class _SessionTabState extends State<SessionTab> {
                   child: SingleChildScrollView(
                     child: TextFormField(
                       decoration: InputDecoration(hintText: "Type here..."),
-                      maxLines: null,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return l10n.cantBeEmpty;
@@ -1019,6 +1018,11 @@ class _SessionTabState extends State<SessionTab> {
                         }
                       },
                       controller: controller,
+                      onFieldSubmitted: (value) {
+                        if (key.currentState!.validate()) {
+                          key.currentState!.save();
+                        }
+                      },
                     ),
                   ),
                 )),
