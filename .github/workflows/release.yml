@@ -303,6 +303,7 @@ jobs:
           PAT: ${{ secrets.PAT }}
         shell: pwsh
         run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+        
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
