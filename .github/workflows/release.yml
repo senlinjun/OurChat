@@ -119,7 +119,9 @@ jobs:
         env:
           PAT: ${{ secrets.PAT }}
         shell: pwsh
-        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+        run: |
+          git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://${PAT}@github.com/".insteadOf "git@github.com:"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -176,7 +178,9 @@ jobs:
         env:
           PAT: ${{ secrets.PAT }}
         shell: pwsh
-        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+        run: |
+          git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://${PAT}@github.com/".insteadOf "git@github.com:"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -247,7 +251,9 @@ jobs:
         env:
           PAT: ${{ secrets.PAT }}
         shell: pwsh
-        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+        run: |
+          git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://${PAT}@github.com/".insteadOf "git@github.com:"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -302,8 +308,9 @@ jobs:
         env:
           PAT: ${{ secrets.PAT }}
         shell: pwsh
-        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
-        
+        run: |
+          git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://${PAT}@github.com/".insteadOf "git@github.com:"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
