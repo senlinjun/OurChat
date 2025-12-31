@@ -259,7 +259,10 @@ jobs:
           git config --global url."git@github.com:".insteadOf "https://github.com/"
           $sshDir = "$env:USERPROFILE\.ssh"
           $knownHostsPath = "$sshDir\known_hosts"
-          ssh-keyscan -t rsa github.com | Out-File -FilePath $knownHostsPath -Encoding ASCII -Force
+          if (-not (Test-Path $sshDir)) {
+            New-Item -ItemType Directory -Path $sshDir -Force | Out-Null
+          }
+          ssh-keyscan -t rsa -o KexAlgorithms=curve25519-sha256 github.com | Out-File -FilePath $knownHostsPath -Encoding ASCII -Force
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
