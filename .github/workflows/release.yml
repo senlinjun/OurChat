@@ -253,10 +253,13 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Configure Git to use SSH
+      - name: Configure Git and RSA Known Hosts
+        shell: pwsh
         run: |
           git config --global url."git@github.com:".insteadOf "https://github.com/"
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          $sshDir = "$env:USERPROFILE\.ssh"
+          $knownHostsPath = "$sshDir\known_hosts"
+          ssh-keyscan -t rsa github.com | Out-File -FilePath $knownHostsPath -Encoding ASCII -Force
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
