@@ -115,14 +115,11 @@ jobs:
         run: pip install requests
       - name: About code generate
         run: python script/generate_about_code.py --version ${{ github.ref_name }} --commit_sha ${{ github.sha }} --enable_version_check
-      - name: Setup SSH for GitHub private packages
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Configure Git to use SSH
-        run: |
-          git config --global url."git@github.com:".insteadOf "https://github.com/"
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Git PAT Auth
+        env:
+          PAT: ${{ secrets.PAT }}
+        shell: pwsh
+        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -175,14 +172,11 @@ jobs:
         run: pip install requests
       - name: About code generate
         run: python script/generate_about_code.py --version ${{ github.ref_name }} --commit_sha ${{ github.sha }} --enable_version_check
-      - name: Setup SSH for GitHub private packages
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Configure Git to use SSH
-        run: |
-          git config --global url."git@github.com:".insteadOf "https://github.com/"
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Git PAT Auth
+        env:
+          PAT: ${{ secrets.PAT }}
+        shell: pwsh
+        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -249,20 +243,11 @@ jobs:
         run: pip install requests
       - name: About code generate
         run: python script/generate_about_code.py --version ${{ github.ref_name }} --commit_sha ${{ github.sha }} --enable_version_check
-      - name: Setup SSH for GitHub private packages
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Configure Git and RSA Known Hosts
+      - name: Git PAT Auth
+        env:
+          PAT: ${{ secrets.PAT }}
         shell: pwsh
-        run: |
-          git config --global url."git@github.com:".insteadOf "https://github.com/"
-          $sshDir = "$env:USERPROFILE\.ssh"
-          $knownHostsPath = "$sshDir\known_hosts"
-          if (-not (Test-Path $sshDir)) {
-            New-Item -ItemType Directory -Path $sshDir -Force | Out-Null
-          }
-          ssh-keyscan -t rsa -o KexAlgorithms=curve25519-sha256 github.com | Out-File -FilePath $knownHostsPath -Encoding ASCII -Force
+        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
@@ -313,15 +298,11 @@ jobs:
         run: pip install requests
       - name: About code generate
         run: python script/generate_about_code.py --version ${{ github.ref_name }} --commit_sha ${{ github.sha }} --enable_version_check
-      - name: Setup SSH for GitHub private packages
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Configure Git to use SSH
-        run: |
-          chmod 700 ~/.ssh
-          git config --global url."git@github.com:".insteadOf "https://github.com/"
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Git PAT Auth
+        env:
+          PAT: ${{ secrets.PAT }}
+        shell: pwsh
+        run: git config --global url."https://${PAT}@github.com/".insteadOf "https://github.com/"
       - name: Flutter Init
         run: cd client && flutter pub get
       - name: Grpc generate
